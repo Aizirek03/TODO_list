@@ -1,29 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/home/home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_list_05flu/home/home_page.dart';
+import 'package:todo_list_05flu/onboarding/onboarding_page.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final prefs =
+      await SharedPreferences.getInstance();
+
+  final bool isViewed =
+      prefs.getBool("isOnboardingViewed") ?? false;
+
+  runApp(
+    MyApp(
+      isOnboardingViewed: isViewed,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+
+  final bool isOnboardingViewed;
+
+  const MyApp({
+    super.key,
+    required this.isOnboardingViewed,
+  });
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
+
       debugShowCheckedModeBanner: false,
 
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFFF2F2F7),
-
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFFF2F2F7),
-          elevation: 0,
-          centerTitle: true,
-        ),
+        scaffoldBackgroundColor:
+            const Color(0xFFF2F2F7),
       ),
 
-      home: const MyHomePage(title: "Мои задачи"),
+      home: isOnboardingViewed
+
+          ? const MyHomePage(
+              title: "Мои задачи",
+            )
+
+          : const OnboardingPage(),
     );
   }
 }

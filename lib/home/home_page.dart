@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/add/add_page.dart';
-import 'package:todolist/database/todo.dart';
-import 'package:todolist/details/details_page.dart';
-import 'package:todolist/settings/setttings_page.dart';
+import 'package:todo_list_05flu/add/add_page.dart';
+import 'package:todo_list_05flu/database/todo.dart';
+import 'package:todo_list_05flu/details/details_page.dart';
+import 'package:todo_list_05flu/settings/settings_page.dart';
+
 
 class MyHomePage extends StatefulWidget {
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/database/todo.dart';
+import 'package:todo_list_05flu/database/todo.dart';
+
 
 class DetailsPage extends StatefulWidget {
 
