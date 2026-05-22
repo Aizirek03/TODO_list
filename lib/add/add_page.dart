@@ -1,40 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list_05flu/add/add_view_model.dart';
+import 'package:todo_list_05flu/database/app_database.dart';
+import 'package:todo_list_05flu/database/app_repository.dart';
+import 'package:todo_list_05flu/database/todo.dart';
 
 class AddPage extends StatefulWidget {
-
-  const AddPage({super.key});
+  final AppDatabase database;
+  const AddPage({required this.database});
 
   @override
   State<AddPage> createState() => _AddPageState();
 }
 
 class _AddPageState extends State<AddPage> {
+  final TextEditingController _controller = TextEditingController();
+  late final AddViewModel vm;
+  late final AppDatabase db;
 
-  final TextEditingController _controller =
-      TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    print("Add Page - initState");
+    db = widget.database;
+
+    final repo = AppRepositoryImpl(db: db);
+    vm = AddViewModel(repo: repo);
+  }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-
-      appBar: AppBar(
-        title: const Text("Новая задача"),
-      ),
+      appBar: AppBar(title: const Text("Новая задача")),
 
       body: Padding(
         padding: const EdgeInsets.all(16),
 
         child: Column(
-
           children: [
-
             TextField(
-
               controller: _controller,
 
               decoration: InputDecoration(
-
                 hintText: "Введите название задачи",
 
                 filled: true,
@@ -49,12 +55,10 @@ class _AddPageState extends State<AddPage> {
             const Spacer(),
 
             SizedBox(
-
               width: double.infinity,
               height: 50,
 
               child: ElevatedButton(
-
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF007AFF),
                 ),
@@ -63,9 +67,7 @@ class _AddPageState extends State<AddPage> {
 
                 child: const Text(
                   "Сохранить",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
@@ -76,10 +78,13 @@ class _AddPageState extends State<AddPage> {
   }
 
   void _saveTodo() {
-
-    Navigator.pop(
-      context,
-      _controller.text,
+    final todo = Todo(
+      id: 5,
+      title: _controller.text,
+      isDone: false,
+      createdAt: DateTime.now().toString(),
     );
+    vm.addTodo(todo);
+    Navigator.pop(context, _controller.text);
   }
 }
