@@ -24,14 +24,23 @@ class AppDatabase {
     return _todoList;
   }
 
+  void saveTodos() {
+
+    print("Todos saved");
+  }
+
   void addTodo(Todo todo) {
 
     _todoList.insert(0, todo);
+
+    saveTodos();
   }
 
   void deleteTodo(int index) {
 
     _todoList.removeAt(index);
+
+    saveTodos();
   }
 
   void updateTodo(
@@ -40,5 +49,17 @@ class AppDatabase {
   ) {
 
     _todoList[index] = todo;
+
+    saveTodos();
+  }
+
+  void updateTodoState(
+    int index,
+    bool isDone,
+  ) {
+
+    _todoList[index].isDone = isDone;
+
+    saveTodos();
   }
 }

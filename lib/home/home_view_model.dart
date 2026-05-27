@@ -22,4 +22,17 @@ class HomeViewModel {
 
     getTodoList();
   }
+
+  void updateTodoState(
+    int index,
+    bool isDone,
+  ) {
+
+    repo.updateTodoState(
+      index,
+      isDone,
+    );
+
+    getTodoList();
+  }
 }

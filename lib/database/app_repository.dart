@@ -13,6 +13,11 @@ abstract class AppRepository {
     int index,
     Todo todo,
   );
+
+  void updateTodoState(
+    int index,
+    bool isDone,
+  );
 }
 
 class AppRepositoryImpl
@@ -49,5 +54,17 @@ class AppRepositoryImpl
   ) {
 
     db.updateTodo(index, todo);
+  }
+
+  @override
+  void updateTodoState(
+    int index,
+    bool isDone,
+  ) {
+
+    db.updateTodoState(
+      index,
+      isDone,
+    );
   }
 }

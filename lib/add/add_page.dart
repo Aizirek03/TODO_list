@@ -5,49 +5,86 @@ import 'package:todo_list_05flu/database/app_repository.dart';
 import 'package:todo_list_05flu/database/todo.dart';
 
 class AddPage extends StatefulWidget {
+
   final AppDatabase database;
-  const AddPage({required this.database});
+
+  const AddPage({
+    required this.database,
+    super.key,
+  });
 
   @override
-  State<AddPage> createState() => _AddPageState();
+  State<AddPage> createState() =>
+      _AddPageState();
 }
 
-class _AddPageState extends State<AddPage> {
-  final TextEditingController _controller = TextEditingController();
+class _AddPageState
+    extends State<AddPage> {
+
+  final TextEditingController _controller =
+      TextEditingController();
+
   late final AddViewModel vm;
+
   late final AppDatabase db;
 
   @override
   void initState() {
+
     super.initState();
-    print("Add Page - initState");
+
     db = widget.database;
 
-    final repo = AppRepositoryImpl(db: db);
-    vm = AddViewModel(repo: repo);
+    final repo = AppRepositoryImpl(
+      db: db,
+    );
+
+    vm = AddViewModel(
+      repo: repo,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      appBar: AppBar(title: const Text("Новая задача")),
+
+      appBar: AppBar(
+        title: const Text(
+          "Новая задача",
+        ),
+      ),
 
       body: Padding(
-        padding: const EdgeInsets.all(16),
+
+        padding:
+            const EdgeInsets.all(16),
 
         child: Column(
+
           children: [
+
             TextField(
+
               controller: _controller,
 
-              decoration: InputDecoration(
-                hintText: "Введите название задачи",
+              decoration:
+                  InputDecoration(
+
+                hintText:
+                    "Введите название задачи",
 
                 filled: true,
+
                 fillColor: Colors.white,
 
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
+                border:
+                    OutlineInputBorder(
+
+                  borderRadius:
+                      BorderRadius.circular(
+                    8,
+                  ),
                 ),
               ),
             ),
@@ -55,19 +92,31 @@ class _AddPageState extends State<AddPage> {
             const Spacer(),
 
             SizedBox(
+
               width: double.infinity,
+
               height: 50,
 
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF007AFF),
+
+                style:
+                    ElevatedButton.styleFrom(
+
+                  backgroundColor:
+                      const Color(
+                    0xFF007AFF,
+                  ),
                 ),
 
                 onPressed: _saveTodo,
 
                 child: const Text(
+
                   "Сохранить",
-                  style: TextStyle(color: Colors.white),
+
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
@@ -78,13 +127,22 @@ class _AddPageState extends State<AddPage> {
   }
 
   void _saveTodo() {
+
     final todo = Todo(
-      id: 5,
+
+      id: DateTime.now()
+          .millisecondsSinceEpoch,
+
       title: _controller.text,
+
       isDone: false,
-      createdAt: DateTime.now().toString(),
+
+      createdAt:
+          DateTime.now().toString(),
     );
+
     vm.addTodo(todo);
-    Navigator.pop(context, _controller.text);
+
+    Navigator.pop(context);
   }
 }

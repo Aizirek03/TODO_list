@@ -68,9 +68,13 @@ class _MyHomePageState
           widget.title,
 
           style: const TextStyle(
+
             color: Colors.black,
+
             fontSize: 28,
-            fontWeight: FontWeight.w500,
+
+            fontWeight:
+                FontWeight.w500,
           ),
         ),
 
@@ -81,7 +85,9 @@ class _MyHomePageState
             onPressed: _openSettings,
 
             icon: const Icon(
+
               Icons.settings,
+
               color: Colors.black,
             ),
           ),
@@ -92,14 +98,17 @@ class _MyHomePageState
 
         padding:
             const EdgeInsets.symmetric(
-              horizontal: 16,
-            ),
+          horizontal: 16,
+        ),
 
         child: ListView.builder(
 
           itemCount: vm.todoList.length,
 
-          itemBuilder: (context, index) {
+          itemBuilder: (
+            context,
+            index,
+          ) {
 
             final todo =
                 vm.todoList[index];
@@ -118,24 +127,26 @@ class _MyHomePageState
 
                 margin:
                     const EdgeInsets.only(
-                      bottom: 12,
-                    ),
+                  bottom: 12,
+                ),
 
                 padding:
                     const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 14,
-                    ),
+                  horizontal: 12,
+                  vertical: 14,
+                ),
 
                 decoration: BoxDecoration(
 
                   color:
-                      const Color(0xFF007AFF),
+                      const Color(
+                    0xFF007AFF,
+                  ),
 
                   borderRadius:
                       BorderRadius.circular(
-                        10,
-                      ),
+                    10,
+                  ),
                 ),
 
                 child: Row(
@@ -146,29 +157,30 @@ class _MyHomePageState
 
                       onTap: () {
 
-                        setState(() {
+                        vm.updateTodoState(
+                          index,
+                          !todo.isDone,
+                        );
 
-                          todo.isDone =
-                              !todo.isDone;
-                        });
+                        setState(() {});
                       },
 
                       child: Container(
 
                         width: 22,
+
                         height: 22,
 
                         decoration:
                             BoxDecoration(
 
-                              color:
-                                  Colors.white,
+                          color: Colors.white,
 
-                              borderRadius:
-                                  BorderRadius.circular(
-                                    4,
-                                  ),
-                            ),
+                          borderRadius:
+                              BorderRadius.circular(
+                            4,
+                          ),
+                        ),
 
                         child: todo.isDone
 
@@ -193,10 +205,12 @@ class _MyHomePageState
 
                         style:
                             const TextStyle(
-                              color:
-                                  Colors.white,
-                              fontSize: 14,
-                            ),
+
+                          color:
+                              Colors.white,
+
+                          fontSize: 14,
+                        ),
                       ),
                     ),
 
@@ -206,10 +220,12 @@ class _MyHomePageState
 
                       style:
                           const TextStyle(
-                            color:
-                                Colors.white70,
-                            fontSize: 11,
-                          ),
+
+                        color:
+                            Colors.white70,
+
+                        fontSize: 11,
+                      ),
                     ),
                   ],
                 ),
@@ -233,20 +249,20 @@ class _MyHomePageState
             style:
                 ElevatedButton.styleFrom(
 
-                  backgroundColor:
-                      const Color(
-                    0xFF007AFF,
-                  ),
+              backgroundColor:
+                  const Color(
+                0xFF007AFF,
+              ),
 
-                  shape:
-                      RoundedRectangleBorder(
+              shape:
+                  RoundedRectangleBorder(
 
-                    borderRadius:
-                        BorderRadius.circular(
-                      12,
-                    ),
-                  ),
+                borderRadius:
+                    BorderRadius.circular(
+                  12,
                 ),
+              ),
+            ),
 
             onPressed:
                 _navigateToAddPage,
